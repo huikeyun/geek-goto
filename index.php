@@ -1,59 +1,57 @@
 <?php
-if (strlen($_SERVER['REQUEST_URI']) > 384 ||
-    strpos($_SERVER['REQUEST_URI'], "eval(") ||
-    strpos($_SERVER['REQUEST_URI'], "base64")) {
-    @header("HTTP/1.1 414 Request-URI Too Long");
-    @header("Status: 414 Request-URI Too Long");
-    @header("Connection: Close");
-    @exit;
-}
-//通过QUERY_STRING取得完整的传入数据，然后取得url=之后的所有值，兼容性更好
-$t_url = preg_replace('/^url=(.*)$/i', '$1', $_SERVER["QUERY_STRING"]);
+	if (strlen($_SERVER['REQUEST_URI']) > 384 || strpos($_SERVER['REQUEST_URI'], "eval(") || strpos($_SERVER['REQUEST_URI'], "base64")) {
+		@header("HTTP/1.1 414 Request-URI Too Long");
+		@header("Status: 414 Request-URI Too Long");
+		@header("Connection: Close");
+		@exit;
+	}
+	//通过QUERY_STRING取得完整的传入数据，然后取得url=之后的所有值，兼容性更好
+	$t_url = preg_replace('/^url=(.*)$/i', '$1', $_SERVER["QUERY_STRING"]);
 
-//此处可以自定义一些特别的外链，不需要可以删除以下5行
-if ($t_url == "cngassky") {
-    $t_url = "https://www.cngassky.com";
-} elseif ($t_url == "baidu") {
-    $t_url = "https://www.baidu.com/";
-}
+	//此处可以自定义一些特别的外链，不需要可以删除以下5行
+	if ($t_url == "cngassky") {
+		$t_url = "https://www.cngassky.com";
+	} else if ($t_url == "baidu") {
+		$t_url = "https://www.baidu.com/";
+	}
 
-//数据处理
-if (!empty($t_url)) {
-    //判断取值是否加密
-    if ($t_url == base64_encode(base64_decode($t_url))) {
-        $t_url = base64_decode($t_url);
-    }
-    //对取值进行网址校验和判断
-    preg_match('/^(http|https|thunder|qqdl|ed2k|Flashget|qbrowser):\/\//i', $t_url, $matches);
-    if ($matches) {
-        $url = $t_url;
-        $title = '页面加载中,请稍候...';
-    } else {
-        preg_match('/\./i', $t_url, $matche);
-        if ($matche) {
-            $url = 'http://' . $t_url;
-            $title = '极客提示您：页面加载中,请稍候...';
-        } else {
-            $url = 'http://' . $_SERVER['HTTP_HOST'];
-            $title = '参数错误，正在返回首页...';
-        }
-    }
-} else {
-    $title = '参数缺失，正在返回首页...';
-    $url = 'http://' . $_SERVER['HTTP_HOST'];
-}
+	//数据处理
+	if (!empty($t_url)) {
+		//判断取值是否加密
+		if ($t_url == base64_encode(base64_decode($t_url))) {
+			$t_url = base64_decode($t_url);
+		}
+		//对取值进行网址校验和判断
+		preg_match('/^(http|https|thunder|qqdl|ed2k|Flashget|qbrowser):\/\//i', $t_url, $matches);
+		if ($matches) {
+			$url = $t_url;
+			$title = '页面加载中,请稍候...';
+		} else {
+			preg_match('/\./i', $t_url, $matche);
+			if ($matche) {
+				$url = 'http://' . $t_url;
+				$title = '极客提示您：页面加载中,请稍候...';
+			} else {
+				$url = 'http://' . $_SERVER['HTTP_HOST'];
+				$title = '参数错误，正在返回首页...';
+			}
+		}
+	} else {
+		$title = '参数缺失，正在返回首页...';
+		$url = 'http://' . $_SERVER['HTTP_HOST'];
+	}
 ?>
-<html>
+<html lang="zh">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="robots" content="noindex, nofollow"/>
-    <noscript>
-        <meta http-equiv="refresh" content="1;url='<?php echo $url; ?>';">
-    </noscript>
-    <script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="robots" content="noindex, nofollow"/>
+	<noscript>
+		<meta http-equiv="refresh" content="1;url='<?php echo $url; ?>';">
+	</noscript>
+	<script>
         function link_jump() {
             //禁止其他网站使用我们的跳转页面
-            var MyHOST = new RegExp("<?php echo $_SERVER['HTTP_HOST']; ?>");
+            const MyHOST = new RegExp("<?php echo $_SERVER['HTTP_HOST']; ?>");
             if (!MyHOST.test(document.referrer)) {
                 location.href = "http://" + MyHOST;
             }
@@ -67,9 +65,9 @@ if (!empty($t_url)) {
             window.opener = null;
             window.close();
         }, 50000);
-    </script>
-    <title><?php echo $title; ?></title>
-    <style type="text/css">
+	</script>
+	<title><?php echo $title; ?></title>
+	<style>
 		body {
 			background: #555
 		}
@@ -137,7 +135,7 @@ if (!empty($t_url)) {
 			color: #000;
 			letter-spacing: 1px;
 			font-size: 20px;
-			font-family: Arial
+			font-family: Arial, sans-serif;
 		}
 
 		.spinner {
@@ -194,14 +192,14 @@ if (!empty($t_url)) {
 				transform: rotate(720deg) scale(0.6)
 			}
 		}
-    </style>
+	</style>
 </head>
 <body>
 <div class="loading">
-    <div class="spinner-wrapper">
-        <span class="spinner-text">页面加载中，请稍候...</span>
-        <span class="spinner"></span>
-    </div>
+	<div class="spinner-wrapper">
+		<span class="spinner-text">页面加载中，请稍候...</span>
+		<span class="spinner"></span>
+	</div>
 </div>
 </body>
 </html>
