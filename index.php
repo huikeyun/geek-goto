@@ -32,7 +32,7 @@ if (!empty($t_url)) {
         preg_match('/\./i', $t_url, $matche);
         if ($matche) {
             $url = 'http://' . $t_url;
-            $title = '燃器具商城提示您：页面加载中,请稍候...';
+            $title = '极客提示您：页面加载中,请稍候...';
         } else {
             $url = 'http://' . $_SERVER['HTTP_HOST'];
             $title = '参数错误，正在返回首页...';
