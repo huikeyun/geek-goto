@@ -2,14 +2,14 @@
   "envId": "{{env.ENV_ID}}",
   "version": "2.0",
   "framework": {
-    "name": "goto",
+    "name": "geek-goto",
     "plugins": {
       "container": {
         "use": "@cloudbase/framework-plugin-container",
         "inputs": {
-          "serviceName": "goto",
-          "servicePath": "/",
-          "containerPort": 80
+          "serviceName": "geek-goto",
+          "servicePath": "/geek-goto",
+          "containerPort": 8080
         }
       }
     }
