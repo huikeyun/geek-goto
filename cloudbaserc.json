@@ -8,8 +8,8 @@
         "use": "@cloudbase/framework-plugin-container",
         "inputs": {
           "serviceName": "goto",
-          "servicePath": "/goto",
-          "containerPort": 8080
+          "servicePath": "/",
+          "containerPort": 80
         }
       }
     }
