@@ -2,13 +2,13 @@
   "envId": "{{env.ENV_ID}}",
   "version": "2.0",
   "framework": {
-    "name": "php-hello-world",
+    "name": "goto",
     "plugins": {
       "container": {
         "use": "@cloudbase/framework-plugin-container",
         "inputs": {
-          "serviceName": "php-hello-world",
-          "servicePath": "/php-hello-world",
+          "serviceName": "goto",
+          "servicePath": "/goto",
           "containerPort": 8080
         }
       }
