@@ -1,4 +1,4 @@
-# CloudBase 云托管 PHP 示例
+# 利用CloudBase 云托管 PHP 实现的网址跳转
 
 参考文档：https://docs.cloudbase.net/run/dockerize-php.html
 
